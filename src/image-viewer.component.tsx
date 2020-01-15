@@ -129,12 +129,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     // 跳到当前图的位置
     this.positionXNumber = this.width * (this.state.currentShowIndex || 0) * (I18nManager.isRTL ? 1 : -1);
     this.standardPositionX = this.positionXNumber;
-    // this.positionX.setValue(this.positionXNumber);
-    Animated.timing(this.positionX, {
-      toValue: this.positionXNumber,
-      duration: 80,
-      useNativeDriver: true
-    }).start();
+    this.positionX.setValue(this.positionXNumber);
+
   }
 
   /**
@@ -236,12 +232,7 @@ export default class ImageViewer extends React.Component<Props, State> {
    */
   public handleHorizontalOuterRangeOffset = (offsetX: number = 0) => {
     this.positionXNumber = this.standardPositionX + offsetX;
-    // this.positionX.setValue(this.positionXNumber);
-    Animated.timing(this.positionX, {
-      toValue: this.positionXNumber,
-      duration: 80,
-      useNativeDriver: true
-    }).start();
+    this.positionX.setValue(this.positionXNumber);
 
     const offsetXRTL = !I18nManager.isRTL ? offsetX : -offsetX;
 
