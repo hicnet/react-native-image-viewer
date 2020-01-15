@@ -69,7 +69,8 @@ export default class ImageViewer extends React.Component<Props, State> {
       // 显示动画
       Animated.timing(this.fadeAnim, {
         toValue: 1,
-        duration: 200
+        duration: 200,
+        useNativeDriver: true
       }).start();
     }
   }
@@ -109,7 +110,8 @@ export default class ImageViewer extends React.Component<Props, State> {
         // 显示动画
         Animated.timing(this.fadeAnim, {
           toValue: 1,
-          duration: 200
+          duration: 200,
+          useNativeDriver: true
         }).start();
       }
     );
@@ -127,7 +129,12 @@ export default class ImageViewer extends React.Component<Props, State> {
     // 跳到当前图的位置
     this.positionXNumber = this.width * (this.state.currentShowIndex || 0) * (I18nManager.isRTL ? 1 : -1);
     this.standardPositionX = this.positionXNumber;
-    this.positionX.setValue(this.positionXNumber);
+    // this.positionX.setValue(this.positionXNumber);
+    Animated.timing(this.positionX, {
+      toValue: this.positionXNumber,
+      duration: 80,
+      useNativeDriver: true
+    }).start();
   }
 
   /**
@@ -229,7 +236,12 @@ export default class ImageViewer extends React.Component<Props, State> {
    */
   public handleHorizontalOuterRangeOffset = (offsetX: number = 0) => {
     this.positionXNumber = this.standardPositionX + offsetX;
-    this.positionX.setValue(this.positionXNumber);
+    // this.positionX.setValue(this.positionXNumber);
+    Animated.timing(this.positionX, {
+      toValue: this.positionXNumber,
+      duration: 80,
+      useNativeDriver: true
+    }).start();
 
     const offsetXRTL = !I18nManager.isRTL ? offsetX : -offsetX;
 
@@ -304,7 +316,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.standardPositionX = this.positionXNumber;
     Animated.timing(this.positionX, {
       toValue: this.positionXNumber,
-      duration: this.props.pageAnimateTime
+      duration: this.props.pageAnimateTime,
+      useNativeDriver: true
     }).start();
 
     const nextIndex = (this.state.currentShowIndex || 0) - 1;
@@ -337,7 +350,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.standardPositionX = this.positionXNumber;
     Animated.timing(this.positionX, {
       toValue: this.positionXNumber,
-      duration: this.props.pageAnimateTime
+      duration: this.props.pageAnimateTime,
+      useNativeDriver: true
     }).start();
 
     const nextIndex = (this.state.currentShowIndex || 0) + 1;
@@ -361,7 +375,8 @@ export default class ImageViewer extends React.Component<Props, State> {
     this.positionXNumber = this.standardPositionX;
     Animated.timing(this.positionX, {
       toValue: this.standardPositionX,
-      duration: 150
+      duration: 150,
+      useNativeDriver: true
     }).start();
   }
 
